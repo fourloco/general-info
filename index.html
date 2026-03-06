@@ -1,23 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información Personal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Información Personal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #feea89;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px 12px 90px;
+      position: relative;
+    }
+
+    .watermark img { width: 100%; height: auto; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background-color: white;
+      padding: 44px 32px 48px;
+      border: 2px solid #21652b;
+      border-radius: 15px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      z-index: 1;
+    }
+
+    .institution-name {
+      font-size: 46px;
+      font-weight: bold;
+      text-align: center;
+      padding-right: 88px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 38px;
+      color: #21652b;
+      font-weight: 600;
+      text-align: center;
+    }
+    h2 {
+      font-size: 18px;
+      color: #21652b;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .student-info {
+      font-size: 34px;
+      line-height: 1.9;
+      color: #21652b;
+      text-align: left;
+      width: 100%;
+    }
+
+    .student-info p {
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .cinta {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+    }
+    .cinta img { width: 100%; height: auto; display: block; }
+
+    .copyright {
+      font-size: 10px;
+      text-align: center;
+      color: white;
+      position: fixed;
+      bottom: 0.8em;
+      width: 100%;
+      z-index: 3;
+    }
+  </style>
 </head>
 <body>
+
+  <div class="watermark">
+    <img src="<?= lema ?>" alt="Marca de agua">
+  </div>
+
+  <div class="container">
+    <img class="escudo" src="<?= escudo ?>" alt="Escudo">
+    <p class="institution-name">UNA</p>
     <h1>Información Personal</h1>
 
-    <h2>Nombre</h2>
-    <p>Jeshua mauricio</p>
+    <div class="student-info">
 
-    <h2>De dónde es</h2>
-    <p>San José, Costa Rica</p>
+        <h2>Nombre</h2>
+        <p>Juan Pérez</p>
 
-    <h2>Carrera</h2>
-    <p>Ingeniería en Sistemas</p>
+        <h2>De dónde es</h2>
+        <p>San José, Costa Rica</p>
 
-    <h2>residencia</h2>
-    <p>BN 2</p>
+        <h2>Carrera</h2>
+        <p>Ingeniería en Sistemas</p>
+    </div>
+  </div>
+
 </body>
 </html>
