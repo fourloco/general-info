@@ -1,118 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Información Personal</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Información Personal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      background-color: #feea89;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 16px 12px 90px;
-      position: relative;
-    }
+        :root {
+            --bg: #0f1923;
+            --card-bg: #162030;
+            --card-border: rgba(255,255,255,0.06);
+            --accent: #c9a84c;
+            --accent-light: rgba(201,168,76,0.12);
+            --text-primary: #f0ece4;
+            --text-secondary: #8a9bb0;
+            --item-bg: #1c2b3a;
+            --item-border: rgba(255,255,255,0.05);
+            --shadow-card: 0 32px 80px rgba(0,0,0,0.45);
+            --radius: 20px;
+            --radius-sm: 12px;
+        }
 
-    .watermark img { width: 100%; height: auto; display: block; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            background-image:
+                radial-gradient(ellipse at 20% 20%, rgba(201,168,76,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 80%, rgba(37,99,235,0.07) 0%, transparent 55%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      background-color: white;
-      padding: 44px 32px 48px;
-      border: 2px solid #21652b;
-      border-radius: 15px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      z-index: 1;
-    }
+        .profile {
+            width: 100%;
+            max-width: 860px;
+        }
 
-    .institution-name {
-      font-size: 46px;
-      font-weight: bold;
-      text-align: center;
-      padding-right: 88px;
-      width: 100%;
-    }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+        }
 
-    h1 {
-      font-size: 38px;
-      color: #21652b;
-      font-weight: 600;
-      text-align: center;
-    }
-    h2 {
-      font-size: 18px;
-      color: #21652b;
-      font-weight: 600;
-      text-align: center;
-    }
+        /* ── Header ── */
+        .card__header {
+            padding: 52px 48px 44px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
 
-    .student-info {
-      font-size: 34px;
-      line-height: 1.9;
-      color: #21652b;
-      text-align: left;
-      width: 100%;
-    }
+        .card__header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1a2f45 0%, #111d2b 100%);
+            z-index: 0;
+        }
 
-    .student-info p {
-      margin-bottom: 8px;
-      text-align: center;
-    }
+        .card__header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
 
-    .cinta {
-      width: 100%;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      z-index: 2;
-    }
-    .cinta img { width: 100%; height: auto; display: block; }
+        .header__eyebrow {
+            position: relative;
+            z-index: 1;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
 
-    .copyright {
-      font-size: 10px;
-      text-align: center;
-      color: white;
-      position: fixed;
-      bottom: 0.8em;
-      width: 100%;
-      z-index: 3;
-    }
-  </style>
+        .card__title {
+            position: relative;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+        }
+
+        .card__title span {
+            color: var(--accent);
+        }
+
+        /* ── Grid ── */
+        .info-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 40px 40px 44px;
+        }
+
+        .info-item {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            border-radius: var(--radius-sm);
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+        }
+
+        .info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            border-radius: 0 2px 2px 0;
+            transition: height 0.32s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+            border-color: rgba(201,168,76,0.2);
+        }
+
+        .info-item:hover::before {
+            height: 100%;
+        }
+
+        .info-item__label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .info-item__text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        /* ── Footer ── */
+        .card__footer {
+            padding: 18px 40px;
+            border-top: 1px solid var(--item-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer__dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.5;
+        }
+
+        .footer__text {
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .card__header {
+                padding: 40px 28px 36px;
+            }
+            .card__title {
+                font-size: 2rem;
+            }
+            .info-list {
+                grid-template-columns: 1fr;
+                padding: 28px 24px 32px;
+                gap: 12px;
+            }
+            .info-item {
+                padding: 22px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <main class="profile">
+        <section class="card">
+            <header class="card__header">
+                <p class="header__eyebrow">Perfil Académico</p>
+                <h1 class="card__title">Información <span>Personal</span></h1>
+            </header>
 
-  <div class="watermark">
-    <img src="<?= lema ?>" alt="Marca de agua">
-  </div>
+            <div class="info-list">
+                <article class="info-item">
+                    <p class="info-item__label">Nombre</p>
+                    <p class="info-item__text">Jeshua Mauricio Lopez Badilla</p>
+                </article>
+                <article class="info-item">
+                    <p class="info-item__label">De dónde es</p>
+                    <p class="info-item__text">Puntarenas</p>
+                </article>
+                <article class="info-item">
+                    <p class="info-item__label">Carrera</p>
+                    <p class="info-item__text">Ingeniería en Sistemas</p>
+                </article>
+                <article class="info-item">
+                    <p class="info-item__label">Residencia</p>
+                    <p class="info-item__text">BN-2</p>
+                </article>
+            </div>
 
-  <div class="container">
-    <img class="escudo" src="<?= escudo ?>" alt="Escudo">
-    <p class="institution-name">UNA</p>
-    <h1>Información Personal</h1>
-
-    <div class="student-info">
-
-        <h2>Nombre</h2>
-        <p>Juan Pérez</p>
-
-        <h2>De dónde es</h2>
-        <p>San José, Costa Rica</p>
-
-        <h2>Carrera</h2>
-        <p>Ingeniería en Sistemas</p>
-    </div>
-  </div>
-
+            <footer class="card__footer">
+                <div class="footer__dot"></div>
+                <span class="footer__text">Universidad Nacional</span>
+                <div class="footer__dot"></div>
+            </footer>
+        </section>
+    </main>
 </body>
 </html>
